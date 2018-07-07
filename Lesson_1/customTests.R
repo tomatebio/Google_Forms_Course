@@ -11,6 +11,10 @@
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
 
+ # load library
+
+library(googlesheets)
+suppressMessages(library(dplyr))
 # Get the swirl state
 getState <- function(){
   # Whenever swirl is running, its callback is at the top of its call stack.
@@ -26,12 +30,9 @@ getLog <- function(){
 submit_log <- function(){
   
   # Please edit the link below
-  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdbuv2kxlvOHeRX3fnPKXBoEyrkpvPjvGPvGh61lTDuUZqWqg/viewform"
+  answer<-gs_key("1bkrQ8_-2kbR4-Hrk5t0nWOeX1tzC6Nayxkmk_jfVL0Q")
   
   # Do not edit the code below
-  if(!grepl("=$", pre_fill_link)){
-    pre_fill_link <- paste0(pre_fill_link, "=")
-  }
   
   p <- function(x, p, f, l = length(x)){if(l < p){x <- c(x, rep(f, p - l))};x}
   
@@ -49,5 +50,12 @@ submit_log <- function(){
                         stringsAsFactors = FALSE)
   write.csv(log_tbl, file = temp, row.names = FALSE)
   encoded_log <- base64encode(temp)
-  browseURL(paste0(pre_fill_link, encoded_log))
+    #browseURL(paste0(pre_fill_link, encoded_log))
+
+    answer<- answer %>%
+        gs_add_row(input=encoded_log)
+
+
+
+    
 }
