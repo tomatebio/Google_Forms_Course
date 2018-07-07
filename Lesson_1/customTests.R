@@ -13,8 +13,7 @@
 
  # load library
 
-library(googlesheets)
-suppressMessages(library(dplyr))
+
 # Get the swirl state
 getState <- function(){
   # Whenever swirl is running, its callback is at the top of its call stack.
@@ -28,7 +27,8 @@ getLog <- function(){
 }
 
 submit_log <- function(){
-  
+  library(googlesheets)
+  suppressMessages(library(dplyr))
   # Please edit the link below
   answer<-gs_key("1bkrQ8_-2kbR4-Hrk5t0nWOeX1tzC6Nayxkmk_jfVL0Q")
   
@@ -54,8 +54,5 @@ submit_log <- function(){
 
     answer<- answer %>%
         gs_add_row(input=encoded_log)
-
-
-
     
 }
